@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+    
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    container:
+      image: docker://vitorugoc/front-end-momentum:1.0.0
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Unit Tests
+        run: npm run test:unit
